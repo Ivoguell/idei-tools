@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Casas de Liderazgo · IDEI Consultores</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --panel: rgba(255,255,255,0.075);
+      --panel2: rgba(255,255,255,0.115);
+      --text: #f4efe4;
+      --muted: #c7bda7;
+      --gold: #d8b56d;
+      --gold2: #f3d99b;
+      --line: rgba(216,181,109,0.28);
+      --danger: #f59e8b;
+      --gry: #b9413b;
+      --rav: #2f63b2;
+      --huf: #d6a927;
+      --sly: #2f7c58;
+      --shadow: 0 22px 70px rgba(0,0,0,0.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(216,181,109,0.16), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(47,99,178,0.16), transparent 28%),
+        radial-gradient(circle at 20% 85%, rgba(47,124,88,0.14), transparent 32%),
+        linear-gradient(135deg, #10131d 0%, #0e0f14 48%, #16100d 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent 80%);
+    }
+
+    .wrap {
+      width: min(1140px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 70px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045)),
+        radial-gradient(circle at 85% 18%, rgba(216,181,109,0.20), transparent 34%);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 48px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(216,181,109,0.24);
+      border-radius: 50%;
+      right: -120px;
+      top: -120px;
+      box-shadow: inset 0 0 80px rgba(216,181,109,0.08);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold2);
+      border: 1px solid rgba(216,181,109,0.32);
+      background: rgba(216,181,109,0.08);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 22px 0 12px;
+      max-width: 850px;
+      font-size: clamp(38px, 7vw, 74px);
+      line-height: 0.92;
+      letter-spacing: -0.055em;
+      font-weight: 850;
+    }
+
+    .lead {
+      max-width: 850px;
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.42;
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.11);
+      color: #efe8d8;
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+      backdrop-filter: blur(10px);
+    }
+
+    .intro {
+      padding: 28px;
+    }
+
+    .intro h2, .houses h2, .quiz h2, .result h2 {
+      margin: 0 0 14px;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .intro p, .houses p, .question p, .result p, .note {
+      color: var(--muted);
+      line-height: 1.58;
+    }
+
+    .houses {
+      padding: 28px;
+    }
+
+    .house-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .house-mini {
+      display: grid;
+      grid-template-columns: 12px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+    }
+
+    .stripe { width: 12px; height: 100%; min-height: 48px; border-radius: 999px; }
+    .stripe.gry { background: var(--gry); }
+    .stripe.rav { background: var(--rav); }
+    .stripe.huf { background: var(--huf); }
+    .stripe.sly { background: var(--sly); }
+
+    .house-mini strong { display: block; margin-bottom: 4px; }
+    .house-mini span { color: var(--muted); font-size: 14px; line-height: 1.35; }
+
+    .user-panel {
+      margin-top: 22px;
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      color: #f7ead0;
+      font-size: 14px;
+      font-weight: 750;
+      margin-bottom: 7px;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.25);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus {
+      border-color: rgba(216,181,109,0.70);
+      box-shadow: 0 0 0 4px rgba(216,181,109,0.10);
+    }
+
+    .quiz {
+      margin-top: 22px;
+      padding: 28px;
+    }
+
+    .quiz-head {
+      display: flex;
+      gap: 18px;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .progress-wrap {
+      min-width: 260px;
+      flex: 0 0 320px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      transition: width 0.25s ease;
+    }
+
+    .question {
+      margin: 16px 0;
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.16);
+    }
+
+    .question.missing {
+      border-color: rgba(245,158,139,0.80);
+      box-shadow: 0 0 0 4px rgba(245,158,139,0.08);
+    }
+
+    .q-title {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border-radius: 50%;
+      background: rgba(216,181,109,0.16);
+      color: var(--gold2);
+      font-weight: 850;
+      border: 1px solid rgba(216,181,109,0.24);
+    }
+
+    .q-title h3 {
+      margin: 5px 0 0;
+      font-size: 19px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .option {
+      position: relative;
+      display: block;
+      cursor: pointer;
+      min-height: 92px;
+    }
+
+    .option input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .option span {
+      display: block;
+      height: 100%;
+      padding: 15px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.055);
+      color: #f2ead9;
+      line-height: 1.38;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .option:hover span {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.085);
+      border-color: rgba(216,181,109,0.40);
+    }
+
+    .option input:checked + span {
+      background: linear-gradient(135deg, rgba(216,181,109,0.24), rgba(255,255,255,0.08));
+      border-color: rgba(216,181,109,0.85);
+      box-shadow: 0 0 0 4px rgba(216,181,109,0.09);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+      align-items: center;
+    }
+
+    button, .button-link {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #18120c;
+      font-size: 15px;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 13px 30px rgba(216,181,109,0.18);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button.secondary, .button-link.secondary {
+      background: rgba(255,255,255,0.09);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: none;
+    }
+
+    button:hover, .button-link:hover { filter: brightness(1.04); }
+
+    .warning {
+      display: none;
+      color: var(--danger);
+      margin-top: 12px;
+      font-weight: 700;
+    }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      padding: 30px;
+      overflow: hidden;
+    }
+
+    .result-top {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .result-badge {
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+      min-height: 100%;
+    }
+
+    .result-badge .small {
+      color: var(--gold2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .result-badge h2 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 0.95;
+      margin: 10px 0;
+    }
+
+    .profile-tag {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 850;
+      margin-top: 8px;
+    }
+
+    .score-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .score-line {
+      display: grid;
+      grid-template-columns: 112px 1fr 45px;
+      gap: 10px;
+      align-items: center;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .score-line strong { white-space: nowrap; }
+
+    .score-meter {
+      height: 11px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .score-meter span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .insight {
+      padding: 19px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .insight h3 {
+      margin: 0 0 8px;
+      color: #fff4dc;
+      font-size: 17px;
+    }
+
+    .insight p, .insight li {
+      color: var(--muted);
+      line-height: 1.52;
+      margin: 0;
+    }
+
+    .insight ul { margin: 0; padding-left: 20px; }
+
+    .mail-panel {
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(216,181,109,0.08);
+      border: 1px solid rgba(216,181,109,0.22);
+    }
+
+    .fineprint {
+      margin-top: 22px;
+      color: rgba(244,239,228,0.58);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      background: rgba(0,0,0,0.82);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      z-index: 50;
+    }
+
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 900px) {
+      .hero { padding: 32px; }
+      .grid, .result-top, .insight-grid { grid-template-columns: 1fr; }
+      .quiz-head { display: block; }
+      .progress-wrap { margin-top: 18px; min-width: 0; width: 100%; }
+      .options { grid-template-columns: 1fr; }
+      .score-line { grid-template-columns: 98px 1fr 42px; }
+    }
+
+    @media print {
+      body { background: white; color: #111; }
+      .hero, .card, .question, .result { box-shadow: none; background: white; border-color: #ddd; }
+      .quiz, .actions, .mail-panel, .user-panel, .houses, .intro, .fineprint, .toast { display: none !important; }
+      .result { display: block !important; }
+      .result p, .insight p, .insight li { color: #333; }
+      .result-badge h2, .intro h2, .houses h2, .quiz h2, .result h2, .insight h3 { color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Harry Potter™ inspired · by IDEI Consultores</div>
+      <h1>Test Casas de Liderazgo</h1>
+      <p class="lead">Un test gamificado para descubrir tu estilo dominante de liderazgo, dirección, toma de decisiones y trabajo en equipo a través de cuatro casas arquetípicas.</p>
+      <div class="meta">
+        <span class="pill">✦ 25 preguntas</span>
+        <span class="pill">✦ 4 perfiles directivos</span>
+        <span class="pill">✦ Resultado accionable</span>
+        <span class="pill">✦ Envío por email con copia IDEI</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card intro">
+        <h2>Cómo funciona</h2>
+        <p>Responde pensando en tu comportamiento real en empresa, no en tu versión ideal. El resultado no etiqueta tu personalidad: identifica tu patrón preferente cuando lideras, colaboras, negocias, decides y gestionas presión.</p>
+        <p>Al final obtendrás tu casa de liderazgo dominante, tu casa secundaria y una lectura ejecutiva sobre fortalezas, riesgos de sobreactivación y recomendaciones prácticas de desarrollo.</p>
+      </div>
+      <div class="card houses">
+        <h2>Las 4 casas</h2>
+        <div class="house-list">
+          <div class="house-mini"><div class="stripe gry"></div><div><strong>Gryffindor · Impulso valiente</strong><span>Decisión, coraje, energía de cambio y liderazgo en momentos de presión.</span></div></div>
+          <div class="house-mini"><div class="stripe rav"></div><div><strong>Ravenclaw · Criterio experto</strong><span>Análisis, conocimiento, pensamiento crítico y calidad en la toma de decisiones.</span></div></div>
+          <div class="house-mini"><div class="stripe huf"></div><div><strong>Hufflepuff · Cohesión fiable</strong><span>Confianza, cooperación, servicio interno y construcción de equipos sostenibles.</span></div></div>
+          <div class="house-mini"><div class="stripe sly"></div><div><strong>Slytherin · Estrategia ambiciosa</strong><span>Influencia, foco, negociación, lectura política y orientación a resultados.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card user-panel">
+      <div>
+        <label for="userName">Nombre y apellidos</label>
+        <input id="userName" type="text" placeholder="Ej. Marta Puig" autocomplete="name" />
+      </div>
+      <div>
+        <label for="userEmail">Email para enviarte el resultado</label>
+        <input id="userEmail" type="email" placeholder="nombre@empresa.com" autocomplete="email" />
+      </div>
+    </section>
+
+    <section class="card quiz" id="quizSection">
+      <div class="quiz-head">
+        <div>
+          <h2>Cuestionario</h2>
+          <p class="note">Elige la opción que más se parece a ti en contexto profesional. No hay respuestas buenas o malas.</p>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Progreso</span><span id="progressText">0/25</span></div>
+          <div class="progress"><div class="bar" id="progressBar"></div></div>
+        </div>
+      </div>
+      <div id="questions"></div>
+      <div class="warning" id="warning">Faltan preguntas por responder. Revisa las marcadas.</div>
+      <div class="actions">
+        <button id="calculateBtn" type="button">Ver mi casa de liderazgo</button>
+        <button id="resetBtn" class="secondary" type="button">Reiniciar test</button>
+      </div>
+    </section>
+
+    <section class="card result" id="resultSection">
+      <div class="result-top">
+        <div class="result-badge" id="resultBadge">
+          <div class="small">Resultado principal</div>
+          <h2 id="resultTitle"></h2>
+          <div class="profile-tag" id="profileTag"></div>
+          <p id="resultIntro"></p>
+        </div>
+        <div class="score-card">
+          <h2>Mapa de puntuación</h2>
+          <div id="scoreLines"></div>
+          <p class="note" id="secondaryText"></p>
+        </div>
+      </div>
+      <div class="insight-grid" id="insights"></div>
+      <div class="mail-panel">
+        <h2>Enviar o guardar resultado</h2>
+        <p class="note">El botón de email abrirá tu programa de correo con el resultado preparado. Tendrás que confirmar el envío desde tu correo. Se añadirá copia a ivo.guell@alumni.esade.edu.</p>
+        <div class="actions">
+          <button id="emailBtn" type="button">Enviar resultado por email</button>
+          <button id="copyBtn" class="secondary" type="button">Copiar resultado</button>
+          <button id="downloadBtn" class="secondary" type="button">Descargar TXT</button>
+          <button id="printBtn" class="secondary" type="button">Guardar / imprimir PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="fineprint">Actividad formativa no oficial, creada por IDEI Consultores. Harry Potter™ y las denominaciones de sus casas pertenecen a sus respectivos titulares. Este recurso usa la referencia cultural únicamente como metáfora pedagógica y no implica afiliación, patrocinio ni autorización oficial.</p>
+  </div>
+
+  <div class="toast" id="toast">Resultado copiado</div>
+
+  <script>
+    const IVO_EMAIL = "ivo.guell@alumni.esade.edu";
+
+    const houses = {
+      gry: {
+        name: "Gryffindor",
+        subtitle: "Liderazgo de impulso valiente",
+        color: "#b9413b",
+        intro: "Tu patrón dominante se activa cuando hay presión, incertidumbre o necesidad de movimiento. Aportas energía, decisión y valentía para abrir camino cuando otros dudan.",
+        company: "En la empresa sueles ser una persona catalizadora: empujas proyectos, desbloqueas conversaciones difíciles y das ritmo cuando el equipo se instala en la espera.",
+        management: "Como directivo/a destacas por decidir, asumir responsabilidad y proteger al equipo en escenarios complejos. Tu liderazgo gana fuerza cuando combinas velocidad con escucha estratégica.",
+        colleagues: "Con tus compañeros puedes transmitir seguridad y entusiasmo. Conviene vigilar que tu intensidad no sea leída como prisa, imposición o poca paciencia hacia ritmos distintos.",
+        risk: "Riesgo de sobreactivación: convertir el coraje en impulsividad, decidir antes de tener información crítica o confundir movimiento con avance real.",
+        development: "Clave de desarrollo: instalar una pausa táctica antes de grandes decisiones, contrastar riesgos y definir criterios de éxito antes de acelerar.",
+        action: "Durante 30 días, antes de empujar una decisión relevante, formula tres preguntas: qué sabemos, qué no sabemos y qué coste tiene esperar 48 horas."
+      },
+      rav: {
+        name: "Ravenclaw",
+        subtitle: "Liderazgo de criterio experto",
+        color: "#2f63b2",
+        intro: "Tu patrón dominante se apoya en el análisis, la calidad del pensamiento y la búsqueda de soluciones bien fundamentadas. Aportas criterio cuando el entorno se llena de ruido.",
+        company: "En la empresa sueles elevar el nivel de conversación: ordenas datos, haces mejores preguntas y ayudas a que las decisiones no dependan solo de intuiciones.",
+        management: "Como directivo/a destacas por diseñar, diagnosticar y anticipar consecuencias. Tu liderazgo gana impacto cuando traduces el análisis en decisiones claras y ejecutables.",
+        colleagues: "Con tus compañeros aportas serenidad intelectual y rigor. Conviene vigilar que el exceso de precisión no enfríe la acción ni haga sentir examinados a los demás.",
+        risk: "Riesgo de sobreactivación: caer en análisis excesivo, postergar decisiones o pedir un nivel de información que la realidad de negocio no siempre permite.",
+        development: "Clave de desarrollo: diferenciar decisiones reversibles e irreversibles, para no aplicar la misma profundidad analítica a todo.",
+        action: "Durante 30 días, clasifica cada decisión en baja, media o alta consecuencia. Ajusta tu nivel de análisis a esa consecuencia, no a tu necesidad de certeza."
+      },
+      huf: {
+        name: "Hufflepuff",
+        subtitle: "Liderazgo de cohesión fiable",
+        color: "#d6a927",
+        intro: "Tu patrón dominante se centra en la confianza, la cooperación y la consistencia. Aportas estabilidad humana, cultura de equipo y capacidad para sostener vínculos profesionales.",
+        company: "En la empresa sueles crear entornos donde la gente puede colaborar mejor, hablar con menos miedo y comprometerse con más sentido de pertenencia.",
+        management: "Como directivo/a destacas por cuidar el clima, integrar perfiles y convertir la confianza en rendimiento. Tu liderazgo gana potencia cuando unes empatía con exigencia clara.",
+        colleagues: "Con tus compañeros generas proximidad, fiabilidad y ayuda real. Conviene vigilar que tu orientación al consenso no te lleve a evitar conversaciones duras necesarias.",
+        risk: "Riesgo de sobreactivación: priorizar la armonía por encima de la responsabilidad, tolerar bajo rendimiento o absorber problemas que deben ser compartidos.",
+        development: "Clave de desarrollo: practicar una asertividad limpia, capaz de cuidar la relación sin rebajar el estándar profesional.",
+        action: "Durante 30 días, en cada reunión importante separa explícitamente tres planos: personas, problemas y compromisos. Cuida los tres, pero no los mezcles."
+      },
+      sly: {
+        name: "Slytherin",
+        subtitle: "Liderazgo estratégico ambicioso",
+        color: "#2f7c58",
+        intro: "Tu patrón dominante se orienta a estrategia, influencia y logro. Lees intereses, detectas palancas de poder y sabes concentrar energía en aquello que mueve resultados.",
+        company: "En la empresa sueles aportar foco, ambición y lectura del tablero. Identificas prioridades, recursos, alianzas y riesgos políticos que otros pueden pasar por alto.",
+        management: "Como directivo/a destacas por negociar, posicionar proyectos y defender objetivos. Tu liderazgo gana legitimidad cuando conectas ambición con transparencia y bien común.",
+        colleagues: "Con tus compañeros puedes ser muy eficaz, directo/a y protector/a de los objetivos. Conviene vigilar que tu foco no sea percibido como frialdad o exceso de cálculo.",
+        risk: "Riesgo de sobreactivación: convertir la estrategia en control, subestimar emociones del equipo o priorizar ganar la partida sobre construir confianza duradera.",
+        development: "Clave de desarrollo: hacer explícitos tus criterios, compartir intención y sumar a otros antes de mover piezas decisivas.",
+        action: "Durante 30 días, antes de negociar una decisión, identifica qué gana el proyecto, qué gana el equipo y qué gana la otra parte."
+      }
+    };
+
+    const questions = [
+      {
+        q: "Cuando un proyecto se bloquea por incertidumbre, ¿qué tiendes a hacer primero?",
+        a: [
+          {h:"gry", t:"Tomar una decisión razonable y poner al equipo en movimiento."},
+          {h:"rav", t:"Analizar causas, escenarios y datos antes de intervenir."},
+          {h:"huf", t:"Reunir al equipo para escuchar, alinear y recuperar confianza."},
+          {h:"sly", t:"Identificar la palanca clave, los intereses y quién puede desbloquearlo."}
+        ]
+      },
+      {
+        q: "Antes de lanzar una iniciativa importante, ¿qué te da más seguridad?",
+        a: [
+          {h:"rav", t:"Un diagnóstico sólido, indicadores claros y riesgos mapeados."},
+          {h:"gry", t:"Un primer piloto rápido que permita aprender haciendo."},
+          {h:"huf", t:"Un equipo convencido, coordinado y con roles bien entendidos."},
+          {h:"sly", t:"Recursos, aliados internos y una posición favorable para ganar tracción."}
+        ]
+      },
+      {
+        q: "En una reunión tensa, ¿cuál suele ser tu contribución más natural?",
+        a: [
+          {h:"huf", t:"Bajar la tensión, ordenar turnos y devolver respeto a la conversación."},
+          {h:"sly", t:"Leer intereses ocultos y reconducir la conversación hacia un acuerdo útil."},
+          {h:"gry", t:"Decir lo que nadie se atreve a decir y empujar una salida."},
+          {h:"rav", t:"Separar hechos de opiniones para mejorar la calidad de la decisión."}
+        ]
+      },
+      {
+        q: "Cuando lideras personas con perfiles muy distintos, ¿qué priorizas?",
+        a: [
+          {h:"huf", t:"Crear confianza, colaboración y sentido de equipo."},
+          {h:"rav", t:"Aprovechar el conocimiento específico de cada perfil."},
+          {h:"gry", t:"Activar energía común y orientar a todos hacia la acción."},
+          {h:"sly", t:"Ubicar a cada persona donde pueda aportar más al resultado."}
+        ]
+      },
+      {
+        q: "Si detectas una oportunidad de negocio, tu primer impulso suele ser…",
+        a: [
+          {h:"sly", t:"Evaluar ventaja competitiva, margen, timing y capacidad de influencia."},
+          {h:"gry", t:"Moverte rápido para no perder la ventana de oportunidad."},
+          {h:"rav", t:"Estudiar mercado, datos y supuestos antes de comprometer recursos."},
+          {h:"huf", t:"Valorar si el equipo podrá sostenerla sin romperse por dentro."}
+        ]
+      },
+      {
+        q: "¿Qué frase describe mejor tu manera de decidir?",
+        a: [
+          {h:"gry", t:"Prefiero decidir con información suficiente que paralizarme buscando certeza total."},
+          {h:"rav", t:"Una buena decisión necesita método, evidencias y pensamiento crítico."},
+          {h:"huf", t:"Una decisión es mejor cuando las personas clave la entienden y la sostienen."},
+          {h:"sly", t:"Una decisión debe mover poder, recursos y resultados en la dirección correcta."}
+        ]
+      },
+      {
+        q: "Cuando alguien de tu equipo comete un error relevante, ¿qué haces primero?",
+        a: [
+          {h:"huf", t:"Entender qué ha pasado, cuidar la relación y reconstruir responsabilidad."},
+          {h:"rav", t:"Analizar el proceso para distinguir fallo individual, sistémico o de criterio."},
+          {h:"gry", t:"Actuar rápido para contener el impacto y evitar que se repita."},
+          {h:"sly", t:"Valorar consecuencias, responsabilidades y cómo proteger el objetivo principal."}
+        ]
+      },
+      {
+        q: "En un cambio organizativo, ¿qué rol sueles asumir?",
+        a: [
+          {h:"gry", t:"Motor de avance: empujo, animo y marco ritmo."},
+          {h:"rav", t:"Arquitecto/a del cambio: diseño lógica, fases y criterios."},
+          {h:"huf", t:"Integrador/a: cuido adopción, resistencias y cohesión."},
+          {h:"sly", t:"Estratega: identifico patrocinadores, resistencias y puntos de influencia."}
+        ]
+      },
+      {
+        q: "Cuando recibes una crítica profesional, ¿qué te resulta más natural?",
+        a: [
+          {h:"rav", t:"Analizar si es precisa, útil y basada en hechos."},
+          {h:"huf", t:"Escuchar la intención, preservar la relación y aprender de la conversación."},
+          {h:"gry", t:"Encajarla, reaccionar y demostrar mejora con hechos."},
+          {h:"sly", t:"Valorar quién la hace, por qué la hace y qué impacto tiene en mi posición."}
+        ]
+      },
+      {
+        q: "¿Qué te molesta más en un equipo?",
+        a: [
+          {h:"gry", t:"La pasividad, la queja permanente y la falta de valentía para actuar."},
+          {h:"rav", t:"La superficialidad, las decisiones sin datos y el pensamiento poco riguroso."},
+          {h:"huf", t:"La deslealtad, la falta de ayuda y el individualismo que rompe el equipo."},
+          {h:"sly", t:"La falta de ambición, foco o capacidad para jugar bien las cartas disponibles."}
+        ]
+      },
+      {
+        q: "Si tienes que defender una propuesta ante dirección, ¿dónde pones más energía?",
+        a: [
+          {h:"sly", t:"En alinear la propuesta con intereses, prioridades y retorno esperado."},
+          {h:"rav", t:"En construir un argumento sólido, coherente y difícil de desmontar."},
+          {h:"gry", t:"En transmitir convicción, urgencia y decisión para que ocurra."},
+          {h:"huf", t:"En mostrar impacto en personas, coordinación y sostenibilidad interna."}
+        ]
+      },
+      {
+        q: "En situaciones de presión, tu fortaleza principal suele ser…",
+        a: [
+          {h:"gry", t:"Mantener coraje y actuar sin quedarme bloqueado/a."},
+          {h:"rav", t:"Pensar con claridad cuando otros se aceleran."},
+          {h:"huf", t:"Sostener emocionalmente al equipo y evitar fracturas."},
+          {h:"sly", t:"Concentrarme en la jugada que puede cambiar el resultado."}
+        ]
+      },
+      {
+        q: "¿Qué tipo de reconocimiento profesional valoras más?",
+        a: [
+          {h:"rav", t:"Que reconozcan mi criterio, conocimiento y calidad de pensamiento."},
+          {h:"gry", t:"Que reconozcan mi valentía, compromiso y capacidad de activar."},
+          {h:"huf", t:"Que reconozcan mi fiabilidad, generosidad y contribución al equipo."},
+          {h:"sly", t:"Que reconozcan mi impacto, influencia y capacidad de conseguir resultados."}
+        ]
+      },
+      {
+        q: "Cuando hay conflicto entre departamentos, ¿cómo intervienes?",
+        a: [
+          {h:"huf", t:"Busco puntos comunes, reconstruyo confianza y reduzco ruido interpersonal."},
+          {h:"rav", t:"Clarifico hechos, responsabilidades, procesos y criterios de decisión."},
+          {h:"gry", t:"Pido una conversación directa y cierro compromisos concretos."},
+          {h:"sly", t:"Identifico dependencias, incentivos y quién necesita ceder para avanzar."}
+        ]
+      },
+      {
+        q: "Si tienes un colaborador brillante pero difícil, ¿qué haces?",
+        a: [
+          {h:"sly", t:"Intento aprovechar su valor situándolo donde aporte sin dañar el sistema."},
+          {h:"huf", t:"Trabajo vínculo, límites y adaptación al equipo."},
+          {h:"rav", t:"Analizo si el problema es de rol, expectativas, feedback o encaje."},
+          {h:"gry", t:"Le marco con claridad qué se espera y qué no puede repetirse."}
+        ]
+      },
+      {
+        q: "En una negociación, tu ventaja suele estar en…",
+        a: [
+          {h:"sly", t:"Leer poder, intereses, concesiones y timing."},
+          {h:"rav", t:"Preparar argumentos, escenarios y datos de respaldo."},
+          {h:"huf", t:"Construir confianza para que la otra parte quiera seguir hablando."},
+          {h:"gry", t:"Defender la posición con firmeza y no arrugarme ante presión."}
+        ]
+      },
+      {
+        q: "¿Qué estilo de proyecto te resulta más estimulante?",
+        a: [
+          {h:"gry", t:"Uno retador, visible, con presión y necesidad de avanzar rápido."},
+          {h:"rav", t:"Uno complejo, intelectual, con problemas difíciles que requieren método."},
+          {h:"huf", t:"Uno transversal, humano, donde sea clave coordinar y sumar personas."},
+          {h:"sly", t:"Uno estratégico, competitivo, con impacto directo en resultados o posición."}
+        ]
+      },
+      {
+        q: "Cuando alguien propone una idea débil pero con entusiasmo, ¿qué haces?",
+        a: [
+          {h:"huf", t:"Cuido su motivación y ayudo a mejorar la idea sin desactivar a la persona."},
+          {h:"rav", t:"La someto a preguntas, datos y criterios para comprobar su consistencia."},
+          {h:"gry", t:"La convierto en una prueba pequeña para ver si puede funcionar."},
+          {h:"sly", t:"Evalúo si puede servir a una oportunidad mayor o si conviene descartarla."}
+        ]
+      },
+      {
+        q: "¿Qué suele aportar más valor en tu manera de liderar reuniones?",
+        a: [
+          {h:"rav", t:"Orden conceptual, preguntas buenas y síntesis clara."},
+          {h:"gry", t:"Ritmo, decisión y cierre de próximos pasos."},
+          {h:"huf", t:"Participación, escucha y clima constructivo."},
+          {h:"sly", t:"Foco en objetivos, acuerdos útiles y lectura de prioridades reales."}
+        ]
+      },
+      {
+        q: "Cuando no tienes autoridad formal, ¿cómo consigues influencia?",
+        a: [
+          {h:"huf", t:"Generando confianza, ayuda y reputación de persona fiable."},
+          {h:"rav", t:"Aportando criterio experto que los demás necesitan para decidir."},
+          {h:"gry", t:"Tomando iniciativa y demostrando compromiso visible."},
+          {h:"sly", t:"Construyendo alianzas, entendiendo intereses y posicionando bien la idea."}
+        ]
+      },
+      {
+        q: "En relación con los objetivos, ¿qué afirmación te representa mejor?",
+        a: [
+          {h:"sly", t:"Los objetivos deben ser claros, ambiciosos y conectados con ventaja real."},
+          {h:"huf", t:"Los objetivos funcionan cuando el equipo los entiende y los siente posibles."},
+          {h:"rav", t:"Los objetivos necesitan indicadores, hipótesis y seguimiento bien diseñado."},
+          {h:"gry", t:"Los objetivos deben movilizar energía y empujar a salir de la comodidad."}
+        ]
+      },
+      {
+        q: "Cuando la organización se llena de burocracia, ¿cómo reaccionas?",
+        a: [
+          {h:"gry", t:"Intento romper el bloqueo y recuperar velocidad."},
+          {h:"rav", t:"Distingo qué controles aportan valor y cuáles son ruido."},
+          {h:"huf", t:"Ayudo al equipo a no frustrarse y a coordinarse mejor dentro del sistema."},
+          {h:"sly", t:"Busco la vía de influencia para simplificar o rodear el obstáculo legítimamente."}
+        ]
+      },
+      {
+        q: "¿Dónde puedes caer más fácilmente si no te regulas?",
+        a: [
+          {h:"gry", t:"En ir demasiado rápido y esperar que todos sigan mi ritmo."},
+          {h:"rav", t:"En analizar demasiado y retrasar la acción."},
+          {h:"huf", t:"En evitar tensión para no dañar el clima."},
+          {h:"sly", t:"En controlar demasiado y compartir poco mi intención."}
+        ]
+      },
+      {
+        q: "Si tuvieras que formar a futuros mandos, ¿qué insistirías más en enseñarles?",
+        a: [
+          {h:"huf", t:"Confianza, escucha, compromiso y conversaciones responsables."},
+          {h:"gry", t:"Decisión, valentía, iniciativa y gestión de momentos difíciles."},
+          {h:"rav", t:"Pensamiento crítico, método, análisis y calidad de criterio."},
+          {h:"sly", t:"Estrategia, influencia, negociación y orientación real a resultados."}
+        ]
+      },
+      {
+        q: "Al final de un proyecto, ¿qué te indica que ha valido la pena?",
+        a: [
+          {h:"gry", t:"Que se haya avanzado de verdad y hayamos superado una barrera importante."},
+          {h:"rav", t:"Que la solución sea inteligente, sólida y deje aprendizaje aplicable."},
+          {h:"huf", t:"Que el equipo salga más unido, más capaz y con confianza reforzada."},
+          {h:"sly", t:"Que haya generado resultados, posición, influencia o ventaja clara."}
+        ]
+      }
+    ];
+
+    const questionsEl = document.getElementById("questions");
+    const progressText = document.getElementById("progressText");
+    const progressBar = document.getElementById("progressBar");
+    const warning = document.getElementById("warning");
+    const resultSection = document.getElementById("resultSection");
+    let lastResultText = "";
+
+    function renderQuestions() {
+      questionsEl.innerHTML = questions.map((item, idx) => `
+        <article class="question" id="q${idx}">
+          <div class="q-title"><div class="q-num">${idx + 1}</div><h3>${item.q}</h3></div>
+          <div class="options">
+            ${item.a.map((option, optIdx) => `
+              <label class="option">
+                <input type="radio" name="q${idx}" value="${option.h}" aria-label="${option.t.replaceAll('"', '&quot;')}" />
+                <span>${option.t}</span>
+              </label>
+            `).join("")}
+          </div>
+        </article>
+      `).join("");
+
+      document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.addEventListener("change", updateProgress);
+      });
+    }
+
+    function getAnswers() {
+      return questions.map((_, idx) => {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        return selected ? selected.value : null;
+      });
+    }
+
+    function updateProgress() {
+      const answers = getAnswers();
+      const completed = answers.filter(Boolean).length;
+      progressText.textContent = `${completed}/${questions.length}`;
+      progressBar.style.width = `${(completed / questions.length) * 100}%`;
+      document.querySelectorAll(".question").forEach(q => q.classList.remove("missing"));
+      warning.style.display = "none";
+    }
+
+    function calculate() {
+      const answers = getAnswers();
+      const missing = answers.map((v, i) => v ? null : i).filter(v => v !== null);
+      if (missing.length) {
+        warning.style.display = "block";
+        missing.forEach(i => document.getElementById(`q${i}`).classList.add("missing"));
+        document.getElementById(`q${missing[0]}`).scrollIntoView({behavior:"smooth", block:"center"});
+        return;
+      }
+
+      const scores = {gry:0, rav:0, huf:0, sly:0};
+      answers.forEach(h => scores[h]++);
+      const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+      const [topKey, topScore] = sorted[0];
+      const [secondKey, secondScore] = sorted[1];
+      const top = houses[topKey];
+      const second = houses[secondKey];
+      const name = document.getElementById("userName").value.trim() || "Participante";
+      const total = questions.length;
+      const isMixed = topScore - secondScore <= 2;
+
+      document.getElementById("resultBadge").style.background = `linear-gradient(135deg, ${top.color}35, rgba(0,0,0,0.20))`;
+      document.getElementById("resultBadge").style.borderColor = `${top.color}88`;
+      document.getElementById("resultTitle").textContent = top.name;
+      const tag = document.getElementById("profileTag");
+      tag.textContent = top.subtitle;
+      tag.style.background = top.color;
+      document.getElementById("resultIntro").textContent = top.intro;
+
+      const scoreLines = document.getElementById("scoreLines");
+      scoreLines.innerHTML = Object.entries(houses).map(([key, h]) => {
+        const pct = Math.round(scores[key] / total * 100);
+        return `<div class="score-line"><strong>${h.name}</strong><div class="score-meter"><span style="width:${pct}%; background:${h.color}"></span></div><span>${scores[key]}/25</span></div>`;
+      }).join("");
+
+      document.getElementById("secondaryText").textContent = isMixed
+        ? `Perfil mixto relevante: tu segunda casa es ${second.name}. Esto indica que combinas ${top.subtitle.toLowerCase()} con ${second.subtitle.toLowerCase()}.`
+        : `Tu segunda casa es ${second.name}. Funciona como estilo de apoyo: aparece especialmente cuando el contexto requiere ${second.subtitle.toLowerCase()}.`;
+
+      const insights = [
+        ["Qué supone en empresa", top.company],
+        ["Como directivo/a", top.management],
+        ["Trato con compañeros", top.colleagues],
+        ["Riesgo de sobreactivación", top.risk],
+        ["Clave de desarrollo", top.development],
+        ["Reto práctico 30 días", top.action]
+      ];
+      document.getElementById("insights").innerHTML = insights.map(([title, text]) => `
+        <div class="insight"><h3>${title}</h3><p>${text}</p></div>
+      `).join("");
+
+      lastResultText = buildResultText(name, topKey, secondKey, scores, isMixed);
+      resultSection.style.display = "block";
+      resultSection.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    function buildResultText(name, topKey, secondKey, scores, isMixed) {
+      const top = houses[topKey];
+      const second = houses[secondKey];
+      const lines = [];
+      lines.push("TEST CASAS DE LIDERAZGO · IDEI CONSULTORES");
+      lines.push("Harry Potter™ inspired · by IDEI Consultores");
+      lines.push("");
+      lines.push(`Participante: ${name}`);
+      lines.push(`Resultado principal: ${top.name} · ${top.subtitle}`);
+      lines.push(`Casa secundaria: ${second.name} · ${second.subtitle}`);
+      lines.push(isMixed ? "Lectura: perfil mixto relevante." : "Lectura: perfil dominante claro con estilo secundario de apoyo.");
+      lines.push("");
+      lines.push("Puntuación:");
+      Object.entries(houses).forEach(([key, h]) => lines.push(`- ${h.name}: ${scores[key]}/25`));
+      lines.push("");
+      lines.push("Lectura ejecutiva:");
+      lines.push(top.intro);
+      lines.push("");
+      lines.push("Qué supone en empresa:");
+      lines.push(top.company);
+      lines.push("");
+      lines.push("Como directivo/a:");
+      lines.push(top.management);
+      lines.push("");
+      lines.push("Trato con compañeros:");
+      lines.push(top.colleagues);
+      lines.push("");
+      lines.push("Riesgo de sobreactivación:");
+      lines.push(top.risk);
+      lines.push("");
+      lines.push("Clave de desarrollo:");
+      lines.push(top.development);
+      lines.push("");
+      lines.push("Reto práctico 30 días:");
+      lines.push(top.action);
+      lines.push("");
+      lines.push("Nota: actividad formativa no oficial, creada por IDEI Consultores. Harry Potter™ y las denominaciones de sus casas pertenecen a sus respectivos titulares. Este recurso usa la referencia cultural únicamente como metáfora pedagógica y no implica afiliación, patrocinio ni autorización oficial.");
+      return lines.join("\n");
+    }
+
+    function openEmail() {
+      if (!lastResultText) calculate();
+      if (!lastResultText) return;
+      const userEmail = document.getElementById("userEmail").value.trim();
+      if (!userEmail || !/^\S+@\S+\.\S+$/.test(userEmail)) {
+        showToast("Introduce un email válido arriba");
+        document.getElementById("userEmail").focus();
+        return;
+      }
+      const name = document.getElementById("userName").value.trim() || "Participante";
+      const subject = `Resultado Test Casas de Liderazgo · ${name}`;
+      const body = lastResultText;
+      const url = `mailto:${encodeURIComponent(userEmail)}?cc=${encodeURIComponent(IVO_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = url;
+    }
+
+    async function copyResult() {
+      if (!lastResultText) calculate();
+      if (!lastResultText) return;
+      try {
+        await navigator.clipboard.writeText(lastResultText);
+        showToast("Resultado copiado");
+      } catch(e) {
+        const ta = document.createElement("textarea");
+        ta.value = lastResultText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast("Resultado copiado");
+      }
+    }
+
+    function downloadTxt() {
+      if (!lastResultText) calculate();
+      if (!lastResultText) return;
+      const blob = new Blob([lastResultText], {type: "text/plain;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const name = (document.getElementById("userName").value.trim() || "participante").toLowerCase().replace(/[^a-z0-9áéíóúüñ]+/gi, "-");
+      a.href = url;
+      a.download = `resultado-casas-liderazgo-${name}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll('input[type="radio"]').forEach(i => i.checked = false);
+      lastResultText = "";
+      resultSection.style.display = "none";
+      updateProgress();
+      document.getElementById("quizSection").scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById("toast");
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2100);
+    }
+
+    renderQuestions();
+    updateProgress();
+    document.getElementById("calculateBtn").addEventListener("click", calculate);
+    document.getElementById("resetBtn").addEventListener("click", resetQuiz);
+    document.getElementById("emailBtn").addEventListener("click", openEmail);
+    document.getElementById("copyBtn").addEventListener("click", copyResult);
+    document.getElementById("downloadBtn").addEventListener("click", downloadTxt);
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>
