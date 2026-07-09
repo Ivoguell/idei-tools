@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impulso Positivo — App</title>
+<meta name="theme-color" content="#ef4b2a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Impulso Positivo">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<style>
+:root{
+  --bg:#fff7f1; --card:#ffffff; --ink:#252525; --muted:#6c5f5a; --brand:#ef4b2a; --brand2:#ffb24a;
+  --soft:#ffe6d8; --ok:#2e9b6f; --line:#ead8cf;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:linear-gradient(180deg,#fff7f1,#fff);color:var(--ink)}
+header{position:sticky;top:0;z-index:20;background:rgba(255,247,241,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.wrap{max-width:980px;margin:0 auto;padding:18px}
+.hero{display:flex;gap:16px;align-items:center;justify-content:space-between}
+.logo{display:flex;gap:12px;align-items:center}
+.mark{width:48px;height:48px;border-radius:18px;background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 10px 25px #ef4b2a33;display:grid;place-items:center;color:white;font-weight:900;font-size:25px}
+h1{font-size:22px;margin:0;letter-spacing:-.4px}
+.sub{color:var(--muted);font-size:13px;margin-top:3px}
+.install{border:0;background:var(--brand);color:white;border-radius:999px;padding:12px 16px;font-weight:800;cursor:pointer}
+main{max-width:980px;margin:0 auto;padding:18px}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0 18px}
+.tab{border:1px solid var(--line);background:white;border-radius:16px;padding:11px 8px;font-weight:800;color:var(--muted);cursor:pointer}
+.tab.active{background:var(--brand);color:white;border-color:var(--brand)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:0 12px 28px #91574212;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.btn{border:0;background:var(--brand);color:white;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer}
+.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn.ghost{background:var(--soft);color:#8d2b18}
+input,textarea,select{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;font:inherit;color:var(--ink)}
+textarea{min-height:110px;resize:vertical}
+label{font-weight:800;font-size:13px;margin:8px 0 6px;display:block}
+.small{font-size:13px;color:var(--muted)}
+.kpi{background:linear-gradient(135deg,#fff,#fff0e7);border:1px solid var(--line);border-radius:20px;padding:16px}
+.kpi b{font-size:28px;color:var(--brand)}
+.exercise{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}
+.exercise .n{min-width:34px;height:34px;border-radius:12px;background:var(--soft);display:grid;place-items:center;color:#a4361e;font-weight:900}
+.exercise h3{margin:0 0 5px;font-size:16px}
+.exercise p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+.badge{display:inline-block;background:var(--soft);color:#8d2b18;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;margin:4px 4px 4px 0}
+.hidden{display:none}
+.quote{font-size:22px;line-height:1.25;font-weight:900;letter-spacing:-.3px}
+.row{display:flex;gap:8px;align-items:center}
+.history{max-height:250px;overflow:auto}
+.item{border-top:1px solid var(--line);padding:10px 0}
+.progress{height:12px;background:#f3ded3;border-radius:99px;overflow:hidden}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0%}
+.wheel{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.footer{font-size:12px;color:var(--muted);text-align:center;margin:30px 0}
+@media(max-width:760px){.tabs{grid-template-columns:repeat(2,1fr)}.grid,.grid3,.wheel{grid-template-columns:1fr}.hero{align-items:flex-start}.install{display:inline-flex;padding:10px 12px;font-size:12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hero">
+    <div class="logo">
+      <div class="mark">+</div>
+      <div><h1>Impulso Positivo</h1><div class="sub">Microacciones diarias para entrenar pensamiento positivo</div></div>
+    </div>
+    <button class="install" id="installBtn">Usar como app</button>
+  </div>
+</header>
+
+<main>
+  <div class="tabs">
+    <button class="tab active" data-view="inicio">Inicio</button>
+    <button class="tab" data-view="hoy">Impulso de hoy</button>
+    <button class="tab" data-view="diario">Diario</button>
+    <button class="tab" data-view="ejercicios">Ejercicios</button>
+    <button class="tab" data-view="progreso">Progreso</button>
+  </div>
+
+  <section id="inicio" class="view">
+    <div class="card">
+      <div class="quote" id="dailyQuote"></div>
+      <p class="small">La app no promete felicidad automática: propone práctica, repetición y pequeñas decisiones conscientes.</p>
+      <div class="grid3">
+        <div class="kpi"><b id="streak">0</b><div>racha de días</div></div>
+        <div class="kpi"><b id="entries">0</b><div>entradas guardadas</div></div>
+        <div class="kpi"><b id="done">0</b><div>impulsos completados</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Ritual de 3 minutos</h2>
+      <p>Hazlo cuando empiece el día, antes de una reunión o al cerrar la noche.</p>
+      <div class="grid">
+        <button class="btn" onclick="openView('hoy')">Activar impulso</button>
+        <button class="btn secondary" onclick="openView('diario')">Escribir diario</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="hoy" class="view hidden">
+    <div class="card">
+      <h2 id="todayTitle">Impulso de hoy</h2>
+      <div id="todayTags"></div>
+      <p id="todayText"></p>
+      <label>Respuesta breve</label>
+      <textarea id="todayAnswer" placeholder="Escribe aquí tu práctica de hoy..."></textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" onclick="saveToday()">Guardar y completar</button>
+        <button class="btn secondary" onclick="newImpulse()">Otro impulso</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Frase para repetir</h2>
+      <div class="quote" id="mantra"></div>
+      <button class="btn ghost" onclick="newMantra()">Nueva frase</button>
+    </div>
+  </section>
+
+  <section id="diario" class="view hidden">
+    <div class="card">
+      <h2>Diario de gratitud</h2>
+      <label>Día</label><input id="dDate" type="date">
+      <label>Cosas buenas que me han pasado hoy</label><textarea id="dGood"></textarea>
+      <label>Qué podría haber hecho para mejorar mi día, qué he aprendido y cómo he ayudado a otros</label><textarea id="dLearn"></textarea>
+      <label>Qué he hecho hoy para cuidar mi salud y bienestar</label><textarea id="dHealth"></textarea>
+      <label>Qué deseo para mañana</label><textarea id="dWish"></textarea>
+      <label>El día de hoy me ha ido...</label>
+      <select id="dMood"><option>Excelente</option><option>Bien</option><option>Regular</option><option>Difícil</option><option>Muy difícil</option></select>
+      <button class="btn" style="margin-top:12px" onclick="saveDiary()">Guardar diario</button>
+    </div>
+    <div class="card">
+      <h2>Historial</h2>
+      <div id="diaryHistory" class="history"></div>
+    </div>
+  </section>
+
+  <section id="ejercicios" class="view hidden">
+    <div class="card">
+      <h2>Biblioteca de dinámicas</h2>
+      <p class="small">Sin ejercicios deportivos ni marcha nórdica. Todo se centra en pensamiento, gratitud, atención, lenguaje, emoción, entorno y relaciones.</p>
+      <div id="exerciseList" class="grid"></div>
+    </div>
+  </section>
+
+  <section id="progreso" class="view hidden">
+    <div class="card">
+      <h2>Rueda de la vida</h2>
+      <p class="small">Puntúa de 0 a 10. La app detecta dónde conviene crear un impulso concreto.</p>
+      <div id="wheel" class="wheel"></div>
+      <button class="btn" style="margin-top:12px" onclick="saveWheel()">Guardar rueda</button>
+    </div>
+    <div class="card">
+      <h2>Balance positivo</h2>
+      <div class="progress"><span id="bar"></span></div>
+      <p id="balanceText"></p>
+      <button class="btn secondary" onclick="exportData()">Exportar datos</button>
+    </div>
+  </section>
+
+  <div class="footer">Impulso Positivo · Prototipo PWA para Android, iPhone y escritorio · Los datos se guardan en este dispositivo.</div>
+</main>
+
+<script>
+const exercises = [
+ {t:"Tarro de la gratitud",c:"Gratitud",d:"Escribe una cosa concreta que agradeces hoy. Sin frases grandes: un detalle real basta.",q:"Hoy agradezco..."},
+ {t:"Escritura nocturna del deseo",c:"Deseo",d:"Antes de dormir, formula un deseo útil para mañana. Debe depender en parte de ti.",q:"Mañana deseo..."},
+ {t:"Reconocimiento positivo",c:"Relaciones",d:"Envía o escribe un reconocimiento específico a alguien. Qué hizo, por qué importa y qué efecto tuvo.",q:"Reconozco a..."},
+ {t:"Detectar hábitos negativos",c:"Hábitos",d:"Identifica un hábito que te resta energía y escribe el primer gesto mínimo para interrumpirlo.",q:"El hábito que hoy observo es..."},
+ {t:"Lo mejor de cada día",c:"Atención",d:"Registra el mejor momento del día en texto o voz. Entrena a la mente a buscar evidencia positiva.",q:"Lo mejor de hoy ha sido..."},
+ {t:"Una sonrisa para tu mente",c:"Sonrisa",d:"Provoca una sonrisa deliberada durante 30 segundos y observa qué cambia en tu estado interno.",q:"Después de sonreír noto..."},
+ {t:"Meditación inicial",c:"Calma",d:"Siéntate dos minutos. Respira. Cuando la mente se vaya, vuelve sin castigarte.",q:"Durante la pausa he observado..."},
+ {t:"SAR: foco selectivo",c:"Neuroatención",d:"Elige una palabra-foco para el día. La mente buscará más señales relacionadas con ella.",q:"Mi palabra-foco de hoy es..."},
+ {t:"Visualización con anclaje",c:"Visualización",d:"Visualiza una escena de éxito sereno y asóciala a un gesto discreto de la mano.",q:"Mi escena de éxito es..."},
+ {t:"Musiqueando",c:"Música",d:"Crea una lista de tres canciones que te cambian el estado. Úsala como interruptor emocional.",q:"Mis canciones impulso son..."},
+ {t:"Sonidos marrones",c:"Concentración",d:"Usa un sonido estable de fondo para trabajar, leer o escribir sin dispersarte.",q:"Con qué sonido me concentro mejor..."},
+ {t:"Gestéxito",c:"Anclaje",d:"Diseña un gesto corto que active seguridad: puño suave, mano al pecho o dedos unidos.",q:"Mi gesto de éxito será..."},
+ {t:"Escritura ascendente",c:"Escritura",d:"Escribe tres líneas con una ligera inclinación ascendente. La forma acompaña a la intención.",q:"La frase que escribo hoy es..."},
+ {t:"Carta a alguien",c:"Vínculos",d:"Escribe una carta breve que sane, agradezca o cierre algo. No hace falta enviarla.",q:"Esta carta va dirigida a..."},
+ {t:"Carta a mí mismo",c:"Autodiálogo",d:"Escríbete como hablarías a alguien que quieres ayudar, no a alguien que quieres juzgar.",q:"Querido/a yo..."},
+ {t:"Palabras poderosas",c:"Lenguaje",d:"Cambia una palabra que te debilita por otra que te moviliza.",q:"Hoy cambio la palabra... por..."},
+ {t:"Feng shui mental",c:"Entorno",d:"Ordena un espacio pequeño y elimina una creencia limitante asociada al desorden.",q:"Hoy libero este espacio/idea..."},
+ {t:"Introspección",c:"Claridad",d:"Pregúntate qué estás evitando y cuál sería el primer movimiento honesto.",q:"Estoy evitando..."},
+ {t:"Bondad del barrio",c:"Bondad",d:"Haz una microacción amable sin buscar reconocimiento.",q:"Mi acto de bondad será..."},
+ {t:"Agradecer la comida",c:"Presencia",d:"Antes de comer, detente diez segundos y reconoce lo que hace posible ese alimento.",q:"Hoy agradezco esta comida porque..."},
+ {t:"Respiración de la caja",c:"Respiración",d:"Inhala 4, retén 4, exhala 4, retén 4. Repite cuatro ciclos.",q:"Tras respirar me siento..."},
+ {t:"Libera tu mente",c:"Energía",d:"Descarga en una lista todo lo que te ocupa. Luego elige solo una acción siguiente.",q:"Lo que libero de mi mente es..."},
+ {t:"Activa tu vida social",c:"Conexión",d:"Contacta con alguien valioso sin pedir nada. Solo presencia, interés o gratitud.",q:"Hoy contactaré con..."},
+ {t:"Pon nota a lo que haces",c:"Conciencia",d:"Puntúa de 0 a 10 una actividad del día y decide cómo subir un punto mañana.",q:"Actividad, nota y mejora..."},
+ {t:"Semana sin quejas",c:"Lenguaje",d:"Detecta una queja y transfórmala en petición, acción o aceptación.",q:"Mi queja transformada es..."},
+ {t:"Círculo de la rumiación",c:"Pensamiento",d:"Nombra el pensamiento repetitivo, escríbelo y pregúntate: ¿me ayuda o me atrapa?",q:"El pensamiento que suelto es..."},
+ {t:"Regla 60-60-1",c:"Proyecto",d:"Dedica los primeros 60 minutos, durante 60 días, a tu proyecto más importante.",q:"Mi proyecto prioritario es..."},
+ {t:"Buscar la felicidad",c:"Felicidad",d:"Responde: ¿cuál es mi hygge? ¿Qué pequeña cosa me hace genuinamente feliz?",q:"Mi pequeña felicidad es..."},
+ {t:"Cambio de pensamiento",c:"Autodiálogo",d:"Convierte un pensamiento automático negativo en una frase realista, útil y accionable.",q:"Pensamiento antiguo / pensamiento nuevo..."},
+ {t:"Conexión con la tierra",c:"Naturaleza",d:"Pasa unos minutos en contacto consciente con naturaleza, suelo, árbol, luz o aire.",q:"Al conectar con la naturaleza noto..."},
+ {t:"El privilegio de estar vivo",c:"Agradecimiento",d:"Escribe tres evidencias simples de que hoy estar vivo ya es un privilegio.",q:"Hoy estar vivo significa..."},
+ {t:"Gratifícate",c:"Placer sano",d:"Programa una actividad gratificante pequeña y concreta.",q:"Hoy me gratifico con..."},
+ {t:"Frases que inspiran",c:"Inspiración",d:"Elige una frase y conviértela en conducta observable durante el día.",q:"Mi frase convertida en acción es..."}
+];
+const mantras = [
+ "Hoy no necesito resolver mi vida entera: necesito dar un paso útil.",
+ "Mi atención es una linterna: puedo elegir dónde iluminar.",
+ "No niego lo difícil; entreno la parte de mí que puede avanzar.",
+ "La gratitud no borra los problemas, pero me devuelve perspectiva.",
+ "Cambio una queja por una acción concreta.",
+ "Mi lenguaje no describe solo mi mundo: también lo construye.",
+ "Una microacción positiva repetida cambia el clima interior.",
+ "Hoy busco evidencias de posibilidad, no excusas de derrota.",
+ "Me hablo con exigencia limpia, no con castigo inútil.",
+ "Elijo presencia, claridad y un gesto pequeño de avance."
+];
+let state = JSON.parse(localStorage.getItem("impulsoPositivo")||'{"entries":[],"done":0,"streak":0,"lastDay":"","wheel":{}}');
+let current = exercises[new Date().getDate()%exercises.length];
+function save(){localStorage.setItem("impulsoPositivo",JSON.stringify(state));renderStats();}
+function openView(id){document.querySelectorAll(".view").forEach(v=>v.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===id)); if(id==="diario") renderHistory(); if(id==="progreso") renderProgress();}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>openView(t.dataset.view));
+function setToday(){document.getElementById("todayTitle").innerText=current.t;document.getElementById("todayText").innerText=current.d+" "+current.q;document.getElementById("todayTags").innerHTML=`<span class="badge">${current.c}</span>`;}
+function newImpulse(){current=exercises[Math.floor(Math.random()*exercises.length)];setToday();document.getElementById("todayAnswer").value="";}
+function newMantra(){document.getElementById("mantra").innerText=mantras[Math.floor(Math.random()*mantras.length)];}
+function saveToday(){const a=document.getElementById("todayAnswer").value.trim(); if(!a){alert("Escribe una respuesta breve antes de guardar.");return;} updateStreak(); state.done++; state.entries.unshift({type:"Impulso",title:current.t,date:new Date().toLocaleDateString(),text:a}); save(); alert("Impulso guardado.");}
+function saveDiary(){updateStreak(); state.entries.unshift({type:"Diario",title:document.getElementById("dMood").value,date:document.getElementById("dDate").value||new Date().toISOString().slice(0,10),text:[
+"Bueno: "+dGood.value,"Aprendizaje: "+dLearn.value,"Bienestar: "+dHealth.value,"Deseo: "+dWish.value].join("\n")}); save(); renderHistory(); alert("Diario guardado.");}
+function updateStreak(){const today=new Date().toISOString().slice(0,10); if(state.lastDay!==today){let y=new Date();y.setDate(y.getDate()-1); state.streak=(state.lastDay===y.toISOString().slice(0,10))?state.streak+1:1; state.lastDay=today;}}
+function renderStats(){streak.innerText=state.streak||0; entries.innerText=state.entries.length; done.innerText=state.done||0;}
+function renderHistory(){diaryHistory.innerHTML=state.entries.length?state.entries.map(e=>`<div class="item"><b>${e.type}: ${e.title}</b><div class="small">${e.date}</div><p>${(e.text||"").replaceAll("\n","<br>")}</p></div>`).join(""):"<p class='small'>Todavía no hay entradas.</p>";}
+function renderExercises(){exerciseList.innerHTML=exercises.map((e,i)=>`<div class="exercise"><div class="n">${i+1}</div><div><h3>${e.t}</h3><span class="badge">${e.c}</span><p>${e.d}</p></div></div>`).join("");}
+const areas=["Salud","Relaciones","Trabajo","Dinero","Crecimiento","Entorno","Ocio","Autodiálogo"];
+function renderWheel(){wheel.innerHTML=areas.map(a=>`<div><label>${a}: <span id="v_${a}">${state.wheel[a]||5}</span>/10</label><input type="range" min="0" max="10" value="${state.wheel[a]||5}" oninput="document.getElementById('v_${a}').innerText=this.value;state.wheel['${a}']=this.value"></div>`).join("");}
+function saveWheel(){save(); renderProgress(); alert("Rueda guardada.");}
+function renderProgress(){renderWheel(); const vals=areas.map(a=>Number(state.wheel[a]||5)); const avg=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*10); bar.style.width=avg+"%"; balanceText.innerText=`Tu balance actual es ${avg}/100. Elige el área más baja y crea un impulso de 10 minutos para mañana.`;}
+function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="impulso-positivo-datos.json"; a.click();}
+dailyQuote.innerText=mantras[new Date().getDate()%mantras.length]; newMantra(); setToday(); renderStats(); renderExercises(); document.getElementById("dDate").value=new Date().toISOString().slice(0,10);
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+installBtn.onclick = () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    return;
+  }
+  alert("Si lo has abierto como archivo, el móvil puede no dejar instalarlo con icono. Para icono real: abre esta app desde una URL en Safari/Chrome y usa Compartir > Añadir a pantalla de inicio. Como archivo HTML sí puedes usarla y guardar datos en este dispositivo.");
+};
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>
